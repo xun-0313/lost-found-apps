@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>AI尋物小幫手</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f9f4; color: #333; }
+    header { background: linear-gradient(135deg, #4CAF50, #2196F3); color: white; padding: 30px; text-align: center; }
+    .container { max-width: 800px; margin: 40px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    form { display: flex; flex-direction: column; gap: 15px; }
+    input[type="file"], input[type="text"] { padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+    button { padding: 12px 20px; background: linear-gradient(135deg, #4CAF50, #2196F3); color: white; border: none; border-radius: 8px; font-size: 1.1em; cursor: pointer; position: relative; overflow: hidden; transition: all 0.3s ease; }
+    button:hover { transform: scale(1.05); background: linear-gradient(135deg, #45a049, #1976D2); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    .ripple { position: absolute; border-radius: 50%; transform: scale(0); animation: ripple-effect 0.6s linear; background: rgba(255,255,255,0.7); pointer-events: none; }
+    @keyframes ripple-effect { to { transform: scale(4); opacity: 0; } }
+    .results { margin-top: 30px; }
+    .item { display: flex; align-items: center; gap: 20px; border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin-bottom: 15px; transition: transform 0.2s; }
+    .item:hover { transform: scale(1.02); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    .item img { max-width: 120px; border-radius: 6px; }
+    .preview { margin-top: 10px; max-width: 200px; }
+  </style>
+  <script>
+    function previewImage(event) {
+      const reader = new FileReader();
+      reader.onload = function(){
+        const output = document.getElementById('preview');
+        output.src = reader.result;
+        output.style.display = 'block';
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll("button").forEach(btn => {
+        btn.addEventListener("click", function(e) {
+          btn.style.transform = "scale(0.95)";
+          setTimeout(() => { btn.style.transform = "scale(1)"; }, 150);
+          let ripple = document.createElement("span");
+          ripple.classList.add("ripple");
+          let rect = this.getBoundingClientRect();
+          ripple.style.left = (e.clientX - rect.left) + "px";
+          ripple.style.top = (e.clientY - rect.top) + "px";
+          ripple.style.width = ripple.style.height = Math.max(rect.width, rect.height) + "px";
+          this.appendChild(ripple);
+          setTimeout(() => ripple.remove(), 600);
+          if (btn.id === "searchBtn") {
+            btn.innerText = "搜尋中...";
+            setTimeout(() => { btn.innerText = "🔍 搜尋"; }, 2000);
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <h1>AI尋物小幫手</h1>
+    <p>讓遺失不再迷路 ✨</p>
+  </header>
+
+  <div class="container">
+    <form action="/search" method="post" enctype="multipart/form-data">
+      <label>📷 上傳物品照片：</label>
+      <input type="file" name="photo" onchange="previewImage(event)">
+      <img id="preview" class="preview" style="display:none;">
+
+      <label>📝 輸入物品描述：</label>
+      <input type="text" name="description" placeholder="例如：藍色水壺">
+
+      <button id="searchBtn" type="submit">🔍 搜尋</button>
+      <button type="reset">♻️ 重置</button>
+    </form>
+
+    {% if results %}
+    <div class="results">
+      <h2>搜尋結果</h2>
+      {% for item in results %}
+        <div class="item">
+          <img src="{{ url_for('static', filename='uploads/' ~ item.img) }}">
+          <div>
+            <p><strong>物品：</strong>{{ item.name }}</p>
+            <p><strong>地點：</strong>{{ item.location }}</p>
+            <p><strong>時間：</strong>{{ item.time }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</body>
+</html>
