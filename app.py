@@ -1,14 +1,11 @@
 from flask import Flask, request, render_template
 import os
 import sqlite3
-from ultralytics import YOLO   # 使用新版 Ultralytics YOLO
+from ultralytics import YOLO
 
 app = Flask(__name__)
 UPLOAD_FOLDER = "static/uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-
-# 載入 YOLO 模型 (建議用輕量版 yolov8n.pt，速度快)
-model = YOLO("yolov8n.pt")
 
 # 初始化資料庫
 def init_db():
@@ -24,6 +21,10 @@ def init_db():
     conn.commit()
     conn.close()
 
+# 載入 YOLO 模型
+model = YOLO("yolov8n.pt")
+init_db()  # 確保 Render 啟動時也會建立資料庫
+
 # 查詢資料庫
 def search_db(keyword):
     conn = sqlite3.connect("lost_found.db")
@@ -35,11 +36,11 @@ def search_db(keyword):
 
 # YOLO 辨識
 def detect_item(img_path):
-    results = model(img_path)  # 推論
+    results = model(img_path)
     detected_items = []
     for r in results:
-        for c in r.boxes.cls:   # 取得類別編號
-            cls_name = model.names[int(c)]  # 轉換成物品名稱
+        for c in r.boxes.cls:
+            cls_name = model.names[int(c)]
             detected_items.append(cls_name)
     return detected_items
 
@@ -60,7 +61,6 @@ def search():
         photo.save(img_path)
         detected_items = detect_item(img_path)
 
-    # 查詢邏輯
     if description:
         db_results = search_db(description)
     elif detected_items:
@@ -71,9 +71,8 @@ def search():
         db_results = []
 
     results = [{"name": r[1], "location": r[2], "time": r[3], "img": r[4]} for r in db_results]
-
     return render_template("index.html", results=results)
 
 if __name__ == "__main__":
-    init_db()
-    app.run(host='0.0.0.0', port=3000, debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
