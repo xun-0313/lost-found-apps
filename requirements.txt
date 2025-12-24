@@ -1,4 +1,3 @@
 flask
 ultralytics
-opencv-python
-Pillow
+gunicorn
