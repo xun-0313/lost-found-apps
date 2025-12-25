@@ -1,6 +1,6 @@
 /* 新增：主題變數（淺色為預設） */
 :root {
-  --bg: #f9f9f9;
+  --bg: #DDDDDD;
   --text: #333;
   --primary: #4CAF50;
   --primary-dark: #45a049;
@@ -18,7 +18,7 @@ body {
 }
 
 html.dark {
-  --bg: #121212;
+  --bg: #272727;
   --text: #e8e8e8;
   --primary: #1db954;
   --primary-dark: #169a3a;
