@@ -1,9 +1,12 @@
 services:
   - type: web
-    name: ai-lost-found
+    name: lost-found-ai
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
-    plan: free
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: YOLO_CONFIG_DIR
+        value: /tmp/Ultralytics
+
 build:
   pythonVersion: 3.10
