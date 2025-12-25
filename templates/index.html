@@ -28,7 +28,7 @@
     <h2>搜尋結果</h2>
     {% for item in results %}
       <div class="item">
-        <img src="{{ url_for('static', filename=item.img.split('static/')[-1]) }}" width="100" alt="遺失物品圖片">
+        <img src="{{ url_for('static', filename=item.img) }}" width="100" alt="遺失物品圖片">
         <div class="item-info">
           <p><strong>物品：</strong>{{ item.name }}</p>
           <p><strong>地點：</strong>{{ item.location }}</p>
