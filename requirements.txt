@@ -1,7 +1,8 @@
 flask
 gunicorn
-ultralytics
+ultralytics==8.0.20
+torch==2.0.1+cpu
+torchvision==0.15.2+cpu
 opencv-python
 numpy
 pillow
-torch>=2.0.0,<2.2.0
