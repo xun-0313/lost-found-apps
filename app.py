@@ -1,10 +1,11 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, session
 import os
 import sqlite3
 from ultralytics import YOLO
 from datetime import datetime
 
 app = Flask(__name__)
+app.secret_key = "xun-secret-key"  # 用於 session
 UPLOAD_FOLDER = "static/uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
@@ -22,10 +23,6 @@ def init_db():
     conn.commit()
     conn.close()
 
-# 載入 YOLO 模型
-def detect_item(img_path):
-    model = YOLO("yolov8n.pt")  # 每次呼叫時才載入
-    results = model.predict(img_path, verbose=False)
 init_db()
 
 # 查詢資料庫
@@ -37,9 +34,10 @@ def search_db(keyword):
     conn.close()
     return rows
 
-# YOLO 辨識
+# YOLO 辨識（延遲載入模型）
 def detect_item(img_path):
-    results = model(img_path)
+    model = YOLO("yolov8n.pt")
+    results = model.predict(img_path, verbose=False)
     detected_items = []
     for r in results:
         for c in r.boxes.cls:
@@ -53,20 +51,27 @@ def home():
 
 @app.route("/search", methods=["POST"])
 def search():
+    # 刪除上一張圖片（如果有）
+    old_file = session.pop("last_uploaded", None)
+    if old_file:
+        old_path = os.path.join(UPLOAD_FOLDER, old_file)
+        if os.path.exists(old_path) and old_path.startswith(UPLOAD_FOLDER):
+            os.remove(old_path)
+
     photo = request.files.get("photo")
     description = request.form.get("description", "").strip()
     save_path = None
+    filename = None
 
     # 儲存圖片
     if photo and photo.filename:
         filename = datetime.now().strftime("%Y%m%d%H%M%S_") + photo.filename
         save_path = os.path.join(UPLOAD_FOLDER, filename)
         photo.save(save_path)
+        session["last_uploaded"] = filename  # 記錄這次上傳的檔名
 
     # YOLO 辨識
     detected = detect_item(save_path) if save_path else []
-
-    # 結合描述與辨識關鍵字
     keywords = detected + ([description] if description else [])
 
     # 查詢資料庫
