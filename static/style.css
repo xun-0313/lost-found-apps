@@ -135,3 +135,85 @@ button:hover {
   height: auto;
   object-fit: cover;
 }
+
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+
+  header {
+    padding: 20px 10px;
+  }
+
+  header h1 {
+    font-size: 1.5em;
+  }
+
+  header p {
+    font-size: 1em;
+  }
+
+  form {
+    padding: 15px;
+  }
+
+  input[type="file"],
+  input[type="text"] {
+    font-size: 1em;
+    padding: 10px;
+  }
+
+  button {
+    width: 100%;
+    font-size: 1em;
+  }
+
+  .item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .item img {
+    width: 100%;
+    margin: 0 0 10px 0;
+  }
+
+  .item-info p {
+    font-size: 0.95em;
+  }
+
+  .results h2 {
+    font-size: 1.2em;
+  }
+
+  .tag-block {
+    padding: 10px;
+  }
+
+  .tag-block h3 {
+    font-size: 1.1em;
+  }
+}
+
+.report-link {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: var(--primary);
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9em;
+  color: var(--muted);
+}
+.results {
+  margin-top: 40px;
+  border-top: 2px solid var(--muted);
+  padding-top: 20px;
+}

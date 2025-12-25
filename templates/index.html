@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
   <title>AI尋物小幫手</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -11,6 +12,7 @@
    <h1>AI尋物小幫手</h1>
       <p>上傳照片或輸入描述，幫你找回遺失物！</p>
       <button id="theme-toggle" type="button">🌙 深色模式</button>
+      <a href="{{ url_for('report') }}" class="report-link">📢 我撿到東西了</a>
   </header>
 
   <main>
@@ -22,7 +24,25 @@
       <input type="text" name="description" id="description" placeholder="例如：藍色水壺">
 
       <button type="submit">🔍 搜尋</button>
-    </form>
+      </form>
+  {% if latest_items %}
+    <div class="results">
+      <h2>🆕 最新拾獲物品</h2>
+      {% for item in latest_items %}
+        <div class="item">
+          <img src="{{ url_for('static', filename=item.img) }}" width="100" alt="拾獲物品圖片">
+          <div class="item-info">
+            <p><strong>物品：</strong>{{ item.name }}</p>
+            <p><strong>地點：</strong>{{ item.location }}</p>
+            <p><strong>時間：</strong>{{ item.time }}</p>
+            {% if item.description %}
+              <p><strong>描述：</strong>{{ item.description }}</p>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
     {% if results %}
   <div class="results">
     <h2>搜尋結果</h2>
@@ -46,5 +66,8 @@
   </main>
   </div>
   <script src="{{ url_for('static', filename='theme.js') }}"></script>
+  <footer>
+  <p>© 2025 AI尋物小幫手 | 由紫衣神教開發</p>
+</footer>
 </body>
 </html>
