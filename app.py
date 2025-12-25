@@ -23,7 +23,9 @@ def init_db():
     conn.close()
 
 # 載入 YOLO 模型
-model = YOLO("yolov8n.pt")
+def detect_item(img_path):
+    model = YOLO("yolov8n.pt")  # 每次呼叫時才載入
+    results = model.predict(img_path, verbose=False)
 init_db()
 
 # 查詢資料庫
