@@ -38,7 +38,7 @@ def search_db(keyword):
 model = YOLO("yolov8n.pt")
 
 def detect_item(img_path):
-    results = model.predict(img_path, verbose=False)
+    results = model.predict(img_path, device="cpu", verbose=False)
     detected_items = []
     for r in results:
         for c in r.boxes.cls:
