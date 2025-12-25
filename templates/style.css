@@ -1,0 +1,137 @@
+/* 新增：主題變數（淺色為預設） */
+:root {
+  --bg: #f9f9f9;
+  --text: #333;
+  --primary: #4CAF50;
+  --primary-dark: #45a049;
+  --surface: #fff;
+  --muted: #ccc;
+  --shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+body.dark {
+  --bg: #121212;
+  --text: #e8e8e8;
+  --primary: #1db954;
+  --primary-dark: #169a3a;
+  --surface: #1e1e1e;
+  --muted: #444;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+} 
+
+header h1 {
+  margin: 0;
+  font-size: 2em;
+}
+
+header p {
+  margin-top: 10px;
+  font-size: 1.1em;
+  opacity: 0.95;
+}
+
+form {
+  margin: 30px 0;
+  background-color: var(--surface);
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+} 
+
+form label {
+  display: block;
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+input[type="file"],
+input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  border: 1px solid var(--muted);
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+} 
+
+input[type="file"]:focus,
+input[type="text"]:focus {
+  border-color: var(--primary);
+  outline: none;
+} 
+
+button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+} 
+
+button:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+} 
+
+.results {
+  margin-top: 40px;
+}
+
+.results h2 {
+  margin-bottom: 20px;
+  font-size: 1.4em;
+  color: var(--primary);
+} 
+
+.item {
+  border: 1px solid var(--muted);
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: var(--surface);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.3s ease;
+} 
+
+.item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.item img {
+  margin-right: 20px;
+  border-radius: 6px;
+  width: 100px;
+  height: auto;
+  object-fit: cover;
+}

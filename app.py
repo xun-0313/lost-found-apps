@@ -2,6 +2,7 @@ from flask import Flask, request, render_template
 import os
 import sqlite3
 from ultralytics import YOLO
+from datetime import datetime
 
 app = Flask(__name__)
 UPLOAD_FOLDER = "static/uploads"
@@ -23,7 +24,7 @@ def init_db():
 
 # 載入 YOLO 模型
 model = YOLO("yolov8n.pt")
-init_db()  # 確保 Render 啟動時也會建立資料庫
+init_db()
 
 # 查詢資料庫
 def search_db(keyword):
@@ -48,29 +49,37 @@ def detect_item(img_path):
 def home():
     return render_template('index.html', results=None)
 
-@app.route('/search', methods=['POST'])
+@app.route("/search", methods=["POST"])
 def search():
-    description = request.form.get('description')
-    photo = request.files.get('photo')
+    photo = request.files.get("photo")
+    description = request.form.get("description", "").strip()
+    save_path = None
 
-    filename = None
-    detected_items = []
-    if photo:
-        filename = photo.filename
-        img_path = os.path.join(UPLOAD_FOLDER, filename)
-        photo.save(img_path)
-        detected_items = detect_item(img_path)
+    # 儲存圖片
+    if photo and photo.filename:
+        filename = datetime.now().strftime("%Y%m%d%H%M%S_") + photo.filename
+        save_path = os.path.join(UPLOAD_FOLDER, filename)
+        photo.save(save_path)
 
-    if description:
-        db_results = search_db(description)
-    elif detected_items:
-        db_results = []
-        for item in detected_items:
-            db_results.extend(search_db(item))
-    else:
-        db_results = []
+    # YOLO 辨識
+    detected = detect_item(save_path) if save_path else []
 
-    results = [{"name": r[1], "location": r[2], "time": r[3], "img": r[4]} for r in db_results]
+    # 結合描述與辨識關鍵字
+    keywords = detected + ([description] if description else [])
+
+    # 查詢資料庫
+    results = []
+    for kw in keywords:
+        for row in search_db(kw):
+            item = {
+                "img": row[4],
+                "name": row[1],
+                "location": row[2],
+                "time": row[3]
+            }
+            if item not in results:
+                results.append(item)
+
     return render_template("index.html", results=results)
 
 if __name__ == "__main__":
