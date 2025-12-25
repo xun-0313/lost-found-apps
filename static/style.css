@@ -17,7 +17,7 @@ body {
   line-height: 1.6;
 }
 
-body.dark {
+html.dark {
   --bg: #121212;
   --text: #e8e8e8;
   --primary: #1db954;
@@ -216,4 +216,8 @@ footer {
   margin-top: 40px;
   border-top: 2px solid var(--muted);
   padding-top: 20px;
+}
+
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

@@ -4,13 +4,15 @@
   <meta charset="UTF-8">
   <title>上傳拾獲物品</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='theme.js') }}" defer></script>
 </head>
-<body>
+<body class="">
   <div class="container">
     <header>
       <h1>📢 我撿到東西了</h1>
       <p>請填寫以下資訊，幫助失主找回物品</p>
       <a href="{{ url_for('home') }}" class="report-link">🏠 回首頁</a>
+      <script src="{{ url_for('static', filename='theme.js') }}" defer></script>
     </header>
 
     <form method="post" enctype="multipart/form-data">
@@ -24,16 +26,16 @@
       <input type="datetime-local" name="time" required>
 
       <label>簡要描述：</label>
-      <input type="text" name="description">
+      <input type="text" name="description" id="description">
 
       <label>上傳照片：</label>
-      <input type="file" name="photo" accept="image/*">
+      <input type="file" name="photo" id="photo" accept="image/*">
 
       <button type="submit">📤 提交拾獲物</button>
     </form>
   </div>
   <footer>
-  <p>© 2025 AI尋物小幫手 | 由彩衣神教開發</p>
-</footer>
+    <p>© 2025 AI尋物小幫手 | 由彩衣神教開發</p>
+  </footer>
 </body>
 </html>
