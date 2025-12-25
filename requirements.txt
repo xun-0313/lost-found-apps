@@ -1,6 +1,7 @@
 flask
 gunicorn
-ultralytics
+ultralytics==8.1.28
 opencv-python
 numpy
 pillow
+torch==2.1.2
