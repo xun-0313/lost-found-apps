@@ -34,9 +34,10 @@ def search_db(keyword):
     conn.close()
     return rows
 
-# YOLO 辨識（延遲載入模型）
+# 在全域載入一次
+model = YOLO("yolov8n.pt")
+
 def detect_item(img_path):
-    model = YOLO("yolov8n.pt")
     results = model.predict(img_path, verbose=False)
     detected_items = []
     for r in results:
