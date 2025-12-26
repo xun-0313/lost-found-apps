@@ -3,6 +3,8 @@ import os
 import sqlite3
 from ultralytics import YOLO
 from datetime import datetime
+import os
+os.environ["YOLO_CONFIG_DIR"] = "/your/custom/path"
 
 app = Flask(__name__)
 app.secret_key = "xun-secret-key"

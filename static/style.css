@@ -2,8 +2,8 @@
 :root {
   --bg: #DDDDDD;
   --text: #333;
-  --primary: #4CAF50;
-  --primary-dark: #45a049;
+  --primary: #ff0080;
+  --primary-dark: #bf0060;
   --surface: #fff;
   --muted: #ccc;
   --shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
