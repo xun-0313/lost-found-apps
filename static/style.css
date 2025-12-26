@@ -2,7 +2,7 @@
 :root {
   --bg: #DDDDDD;
   --text: #333;
-  --primary: #ff0080;
+  --primary: #bf0060;
   --primary-dark: #bf0060;
   --surface: #fff;
   --muted: #ccc;
@@ -23,7 +23,7 @@ body {
   margin-top: 20px;
   padding: 12px 24px;
   background-color: var(--primary);
-  color: white;
+  color: #ff0080;
   border: none;
   border-radius: 6px;
   font-size: 16px;
@@ -117,7 +117,7 @@ button {
   margin-top: 20px;
   padding: 12px 24px;
   background-color: var(--primary);
-  color: white;
+  color: #ff0080;
   border: none;
   border-radius: 6px;
   font-size: 16px;
@@ -240,7 +240,7 @@ button:hover {
   padding: 8px 16px;
   margin: 10px 0 0 0;
   background-color: var(--primary);
-  color: white;
+  color: #ff0080;
   border-radius: 6px;
   text-decoration: none;
   font-weight: bold;
@@ -258,7 +258,7 @@ button:hover {
   .option-button {
   padding: 12px 24px;
   background-color: var(--primary);
-  color: white;
+  color: #ff0080;
   border-radius: 6px;
   text-decoration: none;
   font-weight: bold;

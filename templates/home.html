@@ -9,25 +9,26 @@
 <body>
   <div class="container">
     <header>
-      <h1>🎒 AI 尋物小幫手</h1>
+      <h1>AI 尋物小幫手</h1>
       <p>請選擇你要執行的動作</p>
         <button id="theme-toggle">🌙 深色模式</button>
+        <div class="home-options">
+            <div class="option-card">
+            <h2>📢 我撿到東西了</h2>
+            <p>幫助失主找回遺失物，填寫拾獲資訊</p>
+            <a href="{{ url_for('report') }}" class="option-button">📢 我撿到東西了</a>
+        </div>
+
+        <div class="option-card">
+            <h2>🔍 我遺失了東西</h2>
+            <p>查看是否有人撿到你遺失的物品</p>
+            <a href="{{ url_for('search') }}" class="option-button">🔍 我遺失了東西</a>
+
+        </div>
+    </div>
     </header>
 
-    <div class="home-options">
-      <div class="option-card">
-        <h2>📢 我撿到東西了</h2>
-        <p>幫助失主找回遺失物，填寫拾獲資訊</p>
-        <a href="{{ url_for('report') }}" class="option-button">📢 我撿到東西了</a>
-      </div>
-
-      <div class="option-card">
-        <h2>🔍 我遺失了東西</h2>
-        <p>查看是否有人撿到你遺失的物品</p>
-        <a href="{{ url_for('search') }}" class="option-button">🔍 我遺失了東西</a>
-
-      </div>
-    </div>
+    
   </div>
 
   <footer>
