@@ -66,11 +66,14 @@ def detect_item(img_path):
 
 @app.route('/')
 def home():
-    latest_items = get_latest_items()
-    return render_template('index.html', tagged_results=None, tags=None, latest_items=latest_items)
+    return render_template('home.html')
 
-@app.route("/search", methods=["POST"])
+@app.route("/search", methods=["GET", "POST"])
 def search():
+    if request.method == "GET":
+        return render_template("search.html")  # 顯示搜尋表單頁面
+
+    # POST：處理圖片與描述搜尋
     old_file = session.pop("last_uploaded", None)
     if old_file:
         old_path = os.path.join(UPLOAD_FOLDER, old_file)
@@ -106,7 +109,7 @@ def search():
                 tagged_results[tag].append(item)
 
     latest_items = get_latest_items()
-    return render_template("index.html", tagged_results=tagged_results, tags=tags, latest_items=latest_items)
+    return render_template("search.html", tagged_results=tagged_results, tags=tags, latest_items=latest_items)
 
 @app.route("/report", methods=["GET", "POST"])
 def report():

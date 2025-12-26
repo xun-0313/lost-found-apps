@@ -17,6 +17,27 @@ body {
   line-height: 1.6;
 }
 
+
+.option-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.option-button:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
 html.dark {
   --bg: #272727;
   --text: #e8e8e8;
@@ -51,6 +72,13 @@ header p {
   margin-top: 10px;
   font-size: 1.1em;
   opacity: 0.95;
+}
+
+.report-link {
+  display: inline-block;
+  width: auto;
+  margin-left: 10px;
+  text-align: center;
 }
 
 form {
@@ -186,8 +214,16 @@ button:hover {
     font-size: 0.95em;
   }
 
+  .item-info {
+  width: 100%;
+  }
+
   .results h2 {
     font-size: 1.2em;
+  }
+
+  .results {
+  padding: 10px 0;
   }
 
   .tag-block {
@@ -197,17 +233,42 @@ button:hover {
   .tag-block h3 {
     font-size: 1.1em;
   }
-}
 
-.report-link {
-  display: inline-block;
+  .report-link {
+  display: block;
+  width: 100%;
   padding: 8px 16px;
+  margin: 10px 0 0 0;
   background-color: var(--primary);
   color: white;
   border-radius: 6px;
   text-decoration: none;
   font-weight: bold;
-  margin-left: 10px;
+  text-align: center;
+  font-size: 1em;
+  box-shadow: var(--shadow);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .report-link:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+  }
+
+  .option-button {
+  padding: 12px 24px;
+  background-color: var(--primary);
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: var(--shadow);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  .option-button:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+  }
 }
 
 footer {
@@ -224,22 +285,4 @@ footer {
 
 html {
   transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.report-link {
-  display: block;
-  width: 100%;
-  text-align: center;
-  margin: 10px 0 0 0;
-  font-size: 1em;
-}
-
-.report-link {
-  box-shadow: var(--shadow);
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.report-link:hover {
-  background-color: var(--primary-dark);
-  transform: translateY(-1px);
 }
