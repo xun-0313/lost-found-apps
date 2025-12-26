@@ -11,24 +11,24 @@
     <header>
       <h1>📢 我撿到東西了</h1>
       <p>請填寫以下資訊，幫助失主找回物品</p>
+      <div class="report-wrapper">
       <a href="{{ url_for('home') }}" class="report-link">🏠 回首頁</a>
-      <script src="{{ url_for('static', filename='theme.js') }}" defer></script>
+      </div>
     </header>
 
     <form method="post" enctype="multipart/form-data">
-      <label>物品名稱：</label>
-      <input type="text" name="name" required>
+      <label for="name">物品名稱：</label>
+      <input type="text" name="name" id="name" required>
 
-      <label>拾獲地點：</label>
-      <input type="text" name="location" required>
+      <label for="location">拾獲地點：</label>
+      <input type="text" name="location" id="location" required>
+      <label for="time">拾獲時間：</label>
+      <input type="datetime-local" name="time" id="time" required>
 
-      <label>拾獲時間：</label>
-      <input type="datetime-local" name="time" required>
-
-      <label>簡要描述：</label>
+      <label for="description">簡要描述：</label>
       <input type="text" name="description" id="description">
 
-      <label>上傳照片：</label>
+      <label for="photo">上傳照片：</label>
       <input type="file" name="photo" id="photo" accept="image/*">
 
       <button type="submit">📤 提交拾獲物</button>

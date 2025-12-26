@@ -140,6 +140,10 @@ button:hover {
   .container {
     padding: 10px;
   }
+  .report-wrapper {
+  text-align: center;
+  margin-top: 15px;
+}
 
   header {
     padding: 20px 10px;
@@ -220,4 +224,22 @@ footer {
 
 html {
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.report-link {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin: 10px 0 0 0;
+  font-size: 1em;
+}
+
+.report-link {
+  box-shadow: var(--shadow);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.report-link:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
 }
