@@ -3,7 +3,7 @@
   --bg: #DDDDDD;
   --text: #333;
   --primary: #4CAF50;
-  --primary-dark: #45a049;
+  --primary-dark: #265b28;
   --surface: #fff;
   --muted: #ccc;
   --shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
@@ -22,7 +22,7 @@ body {
   display: inline-block;
   margin-top: 20px;
   padding: 12px 24px;
-  background-color: var(--primary);
+  background-color: #341d8263;
   color: white;
   border: none;
   border-radius: 6px;
@@ -34,7 +34,7 @@ body {
 }
 
 .option-button:hover {
-  background-color: var(--primary-dark);
+  background-color: #;
   transform: translateY(-1px);
 }
 
@@ -116,7 +116,7 @@ input[type="text"]:focus {
 button {
   margin-top: 20px;
   padding: 12px 24px;
-  background-color: var(--primary);
+  background-color: #341d3263;
   color: white;
   border: none;
   border-radius: 6px;
@@ -125,8 +125,25 @@ button {
   transition: background-color 0.3s ease, transform 0.2s ease;
 } 
 
+html.dark button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #DDDDDD;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
 button:hover {
-  background-color: var(--primary-dark);
+  background-color: #272727;
+  transform: translateY(-1px);
+} 
+
+html.dark button:hover {
+  background-color: #DDDDDD;
   transform: translateY(-1px);
 } 
 
