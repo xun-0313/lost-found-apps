@@ -22,7 +22,7 @@ body {
   display: inline-block;
   margin-top: 20px;
   padding: 12px 24px;
-  background-color: #341d8263;
+  background-color: #21cf113b;
   color: white;
   border: none;
   border-radius: 6px;
@@ -34,7 +34,7 @@ body {
 }
 
 .option-button:hover {
-  background-color: #;
+  background-color: var(--primary);
   transform: translateY(-1px);
 }
 
@@ -55,6 +55,15 @@ html.dark {
 }
 
 header {
+  background: linear-gradient(90deg, #bababa, var(--primary-dark));
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+} 
+
+html.dark header {
   background: linear-gradient(90deg, var(--primary), var(--primary-dark));
   color: white;
   padding: 30px 20px;
