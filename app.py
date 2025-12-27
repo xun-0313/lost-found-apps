@@ -116,29 +116,36 @@ def search():
 @app.route("/report", methods=["GET", "POST"])
 def report():
     if request.method == "POST":
-        photo = request.files.get("photo")
-        name = request.form.get("name")
-        location = request.form.get("location")
-        time = request.form.get("time")
-        description = request.form.get("description")
+        try:
+            photo = request.files.get("photo")
+            name = request.form.get("name")
+            location = request.form.get("location")
+            time = request.form.get("time")
+            description = request.form.get("description")
 
-        filename = None
-        if photo and photo.filename:
-            filename = datetime.now().strftime("%Y%m%d%H%M%S_") + photo.filename
-            save_path = os.path.join(UPLOAD_FOLDER, filename)
-            photo.save(save_path)
+            filename = None
+            if photo and photo.filename:
+                filename = datetime.now().strftime("%Y%m%d%H%M%S_") + photo.filename
+                save_path = os.path.join(UPLOAD_FOLDER, filename)
+                photo.save(save_path)
 
-        conn = sqlite3.connect(DB_PATH)
-        c = conn.cursor()
-        c.execute("INSERT INTO items (name, location, time, description, image_path) VALUES (?, ?, ?, ?, ?)",
-                  (name, location, time, description, f"uploads/{filename}" if filename else None))
-        conn.commit()
-        conn.close()
+            conn = sqlite3.connect(DB_PATH)
+            c = conn.cursor()
+            c.execute("INSERT INTO items (name, location, time, description, image_path) VALUES (?, ?, ?, ?, ?)",
+                      (name, location, time, description, f"uploads/{filename}" if filename else None))
+            conn.commit()
+            conn.close()
 
-        return redirect(url_for("home"))
+            return redirect(url_for("home"))
+
+        except Exception as e:
+            print("⚠️ 發生錯誤：", e)
+            return "發生錯誤，請稍後再試或聯絡管理員。", 500
 
     return render_template("report.html")
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
+
+    
