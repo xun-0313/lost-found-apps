@@ -55,7 +55,7 @@ html.dark {
 }
 
 header {
-  background: linear-gradient(90deg, #bababa, var(--primary-dark));
+  background: linear-gradient(90deg, #61d24a, var(--primary-dark));
   color: white;
   padding: 30px 20px;
   text-align: center;
@@ -137,8 +137,8 @@ button {
 html.dark button {
   margin-top: 20px;
   padding: 12px 24px;
-  background-color: #DDDDDD;
-  color: white;
+  background-color: #d0d0d0;
+  color: rgb(0, 0, 0);
   border: none;
   border-radius: 6px;
   font-size: 16px;
