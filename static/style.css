@@ -22,7 +22,7 @@ body {
   display: inline-block;
   margin-top: 20px;
   padding: 12px 24px;
-  background-color: #5d9d7c3b;
+  background-color: #03331a3b;
   color: white;
   border: none;
   border-radius: 6px;
@@ -34,7 +34,7 @@ body {
 }
 
 .option-button:hover {
-  background-color: #1e6621;
+  background-color: #329735;
   transform: translateY(-1px);
 }
 
